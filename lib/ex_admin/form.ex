@@ -1019,6 +1019,10 @@ defmodule ExAdmin.Form do
     %{name: model_name, model: resource, id: model_name, class: "form-control"}
     |> datetime_select(field_name, Map.get(opts, :options, []))
   end
+  def build_control(:naive_datetime, resource, opts, model_name, field_name, _ext_name) do
+    %{name: model_name, model: resource, id: model_name, class: "form-control"}
+    |> datetime_select(field_name, Map.get(opts, :options, []))
+  end
   def build_control(Ecto.Date, resource, opts, model_name, field_name, _ext_name) do
     %{name: model_name, model: resource, id: model_name, class: "form-control"}
     |> date_select(field_name, Map.get(opts, :options, []))
@@ -1182,11 +1186,11 @@ defmodule ExAdmin.Form do
 
   defp date_builder(b, _opts) do
     markup do
-      b.(:year, [])
-      span(".date-separator")
       b.(:month, [])
       span(".date-separator")
       b.(:day, [])
+      span(".date-separator")
+      b.(:year, [])
     end
   end
 
